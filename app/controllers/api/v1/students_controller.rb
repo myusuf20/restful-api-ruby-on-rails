@@ -21,6 +21,16 @@ module Api
         end
       end
 
+      def update
+        @student = Student.find(params[:id])
+
+        if @student.update(student_params)
+          render json: @student
+        else
+          render json: @student, status: :unprocessable_entity
+        end
+      end
+
       private
       def student_params
         params.require(:student).permit(:name, :address)
