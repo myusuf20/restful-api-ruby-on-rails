@@ -31,6 +31,17 @@ module Api
         end
       end
 
+      def destroy
+        @student = Student.find(params[:id])
+
+        if @student.present?
+          @student.destroy
+          render json: @student
+        else
+          render json: { error: 'Student not found' }
+        end
+      end
+
       private
       def student_params
         params.require(:student).permit(:name, :address)
